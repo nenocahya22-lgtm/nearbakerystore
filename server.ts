@@ -8,8 +8,12 @@ dotenv.config();
 
 const { Pool } = pg;
 
-// Database connection from database_engine.py
-const DB_URL = "postgresql://postgres.btcsynyxodkonqdpwowx:%23Nenocahyamulan190604@aws-1-ap-southeast-1.pooler.supabase.com:6543/postgres";
+// Database connection - set DB_URL in .env file
+const DB_URL = process.env.DB_URL || "";
+
+if (!DB_URL) {
+  console.warn("⚠️ DB_URL not set. API endpoints will return errors. Set DB_URL in .env file.");
+}
 
 const pool = new Pool({
   connectionString: DB_URL,
